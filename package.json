@@ -1,12 +1,20 @@
 {
   "private": true,
   "name": "oopt",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Old good getopt with no extras",
   "main": "index.js",
   "scripts": {
     "test": "jshint . --exclude node_modules --reporter node_modules/jshint-stylish/ ; tape tests/*.js | tap-spec"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/astur/oopt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/astur/oopt/issues"
+  },
+  "homepage": "https://github.com/astur/oopt",
   "devDependencies": {
     "arrgv": "0.0.6",
     "jshint": "^2.8.0",
