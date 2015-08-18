@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "oopt",
   "version": "0.0.2",
   "description": "Old good getopt with no extras",
