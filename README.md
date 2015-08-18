@@ -2,6 +2,9 @@
 
 Parsing commanl-line arguments in style of old good [getopt](http://pubs.opengroup.org/onlinepubs/9699919799/functions/getopt.html) with no extras. For geeks and minimalists only. Only configuration is standart `optstring` (something like '`ab:c`') and result is an object with 'options', 'arguments' and 'operands'.
 
+[![Build Status][travis-image]][travis-url]
+[![NPM version][npm-image]][npm-url]
+
 If no bugs, it ought to be pure getopt, that is described in [The Open Group Base Specifications Issue 7](http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/contents.html) (aka IEEE Std 1003.1, 2013 Edition):
 
 > The getopt() function is a command-line parser that shall follow Utility Syntax Guidelines 3, 4, 5, 6, 7, 9, and 10 in XBD [Utility Syntax Guidelines](http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html#tag_12_02).
@@ -34,7 +37,7 @@ If something in `oopt` works not like in Guidelines - that's a bug. Feel free to
 ## Install
 
 ```bash
-npm install arrgv
+npm install oopt
 ```
 
 ## Tests
@@ -85,3 +88,8 @@ More examples in tests.
 ## License
 
 MIT
+
+[travis-url]: https://travis-ci.org/astur/oopt
+[travis-image]: https://travis-ci.org/astur/oopt.svg?branch=master
+[npm-url]: https://npmjs.org/package/oopt
+[npm-image]: https://img.shields.io/npm/v/oopt.svg
