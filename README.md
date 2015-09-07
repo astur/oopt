@@ -92,4 +92,4 @@ MIT
 [travis-url]: https://travis-ci.org/astur/oopt
 [travis-image]: https://travis-ci.org/astur/oopt.svg?branch=master
 [npm-url]: https://npmjs.org/package/oopt
-[npm-image]: https://img.shields.io/npm/v/oopt.svg
+[npm-image]: https://badge.fury.io/js/oopt.svg
