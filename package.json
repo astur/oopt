@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
   "scripts": {
-    "test": "eslint . && tape tests/*.js | tap-spec"
+    "test": "eslint . && ava"
   },
   "repository": {
     "type": "git",
@@ -16,10 +16,9 @@
   },
   "devDependencies": {
     "arrgv": "^1.0.0",
+    "ava": "^0.25.0",
     "eslint": "^4.19.1",
-    "eslint-config-astur": "0.0.2",
-    "tap-spec": "^4.0.2",
-    "tape": "^4.0.1"
+    "eslint-config-astur": "0.0.2"
   },
   "keywords": [
     "getopt",

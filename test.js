@@ -1,8 +1,8 @@
-const tape = require('tape');
-const oopt = require('../');
+const test = require('ava');
+const oopt = require('.');
 const arrgv = require('arrgv');
 
-tape.test('errors', t => {
+test('errors', t => {
     t.throws(
         () => { oopt(1); },
         Error,
@@ -56,124 +56,120 @@ tape.test('errors', t => {
         Error,
         'key "-W" is reserved'
     );
-
-    t.end();
 });
 
-tape.test('options', t => {
-    t.same(
+test('options', t => {
+    t.deepEqual(
         oopt('', []),
         {},
         'empty optstring and empty args'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('a', []),
         {a: false},
         'small letter in optstring'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('A', []),
         {A: false},
         'capital letter in optstring'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('1', []),
         {1: false},
         'digit in optstring'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('a:1:', []),
         {a: '', 1: ''},
         'options with arguments'
     );
-
-    t.end();
 });
 
-tape.test('values', t => {
-    t.same(
+test('values', t => {
+    t.deepEqual(
         oopt('a', arrgv('-a')),
         {a: true},
         'single option'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('a', arrgv('"-a"')),
         {a: true},
         'quoted single option'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('-a -b arg')),
         {a: true, b: 'arg', c: false},
         'options with no operands'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('--')),
         {a: false, b: '', c: false, _: []},
         '-- is no option'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('-ab arg p1 p2')),
         {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
         'grouped options with argument and operands'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('-a -b arg p1 p2')),
         {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
         'separate options with argument and operands'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('-b arg -a p1 p2')),
         {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
         'options order does not matter'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('-a -barg p1 p2')),
         {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
         'argument joined with option'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('-abarg p1 p2')),
         {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
         'argument joined with group options'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('-a -b arg -- -c p1 -p2')),
         {a: true, b: 'arg', c: false, _: ['-c', 'p1', '-p2']},
         'everything after "--" there is operands'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('-a -b "a r g" "p1 p2"')),
         {a: true, b: 'a r g', c: false, _: ['p1 p2']},
         'multiword operands and argument'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('-b -a')),
         {a: false, b: '-a', c: false},
         'no optional arguments'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('"-a -b"')),
         {a: false, b: '', c: false, _: ['-a -b']},
         'no multiword options'
     );
 
-    t.same(
+    t.deepEqual(
         oopt('ab:c', arrgv('p1 p2 -a -b arg')),
         {a: false, b: '', c: false, _: ['p1', 'p2', '-a', '-b', 'arg']},
         'operands before options'
@@ -190,6 +186,4 @@ tape.test('values', t => {
         Error,
         'illegal option'
     );
-
-    t.end();
 });
