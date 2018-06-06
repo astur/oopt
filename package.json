@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
   "scripts": {
-    "test": "jshint . --exclude node_modules --reporter node_modules/jshint-stylish/ ; tape tests/*.js | tap-spec"
+    "test": "eslint . && tape tests/*.js | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "arrgv": "^1.0.0",
-    "jshint": "^2.8.0",
-    "jshint-stylish": "^2.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-astur": "0.0.2",
     "tap-spec": "^4.0.2",
     "tape": "^4.0.1"
   },
