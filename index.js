@@ -26,14 +26,15 @@ module.exports = (optstring, args = process.argv.slice(2)) => {
             return result;
         }
 
-        if(!/^-/.test(args[i]) || /\s/.test(args[i])){
+        if(!args[i].startsWith('-') || /\s/.test(args[i])){
             result._ = args.slice(i);
             return result;
         }
 
         const opts = args[i].split('').slice(1);
-        let c;
-        while((c = opts.shift()) !== undefined){
+
+        let c = opts.shift();
+        while(c !== undefined){
             if(typeof result[c] === 'undefined') throw new Error(`illegal option -- ${c}`);
             if(typeof result[c] === 'boolean') result[c] = true;
             if(typeof result[c] === 'string'){
@@ -47,6 +48,7 @@ module.exports = (optstring, args = process.argv.slice(2)) => {
                     i++;
                 }
             }
+            c = opts.shift();
         }
     }
 
