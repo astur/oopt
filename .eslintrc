@@ -1,3 +1,6 @@
 {
-    "extends": "astur"
+    "extends": "astur",
+    "rules": {
+        "more/no-c-like-loops": "off"
+    }
 }
