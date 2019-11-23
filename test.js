@@ -67,19 +67,19 @@ test('options', t => {
 
     t.deepEqual(
         oopt('a', []),
-        {a: false},
+        {a: 0},
         'small letter in optstring'
     );
 
     t.deepEqual(
         oopt('A', []),
-        {A: false},
+        {A: 0},
         'capital letter in optstring'
     );
 
     t.deepEqual(
         oopt('1', []),
-        {1: false},
+        {1: 0},
         'digit in optstring'
     );
 
@@ -93,85 +93,97 @@ test('options', t => {
 test('values', t => {
     t.deepEqual(
         oopt('a', arrgv('-a')),
-        {a: true},
+        {a: 1},
         'single option'
     );
 
     t.deepEqual(
+        oopt('a', arrgv('-a -a')),
+        {a: 2},
+        'single option multiple invocations'
+    );
+
+    t.deepEqual(
+        oopt('a', arrgv('-aa')),
+        {a: 2},
+        'single option multiple invocations grouped'
+    );
+
+    t.deepEqual(
         oopt('a', arrgv('"-a"')),
-        {a: true},
+        {a: 1},
         'quoted single option'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('-a -b arg')),
-        {a: true, b: 'arg', c: false},
+        {a: 1, b: 'arg', c: 0},
         'options with no operands'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('--')),
-        {a: false, b: '', c: false, _: []},
+        {a: 0, b: '', c: 0, _: []},
         '-- is no option'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('-ab arg p1 p2')),
-        {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
+        {a: 1, b: 'arg', c: 0, _: ['p1', 'p2']},
         'grouped options with argument and operands'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('-a -b arg p1 p2')),
-        {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
+        {a: 1, b: 'arg', c: 0, _: ['p1', 'p2']},
         'separate options with argument and operands'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('-b arg -a p1 p2')),
-        {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
+        {a: 1, b: 'arg', c: 0, _: ['p1', 'p2']},
         'options order does not matter'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('-a -barg p1 p2')),
-        {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
+        {a: 1, b: 'arg', c: 0, _: ['p1', 'p2']},
         'argument joined with option'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('-abarg p1 p2')),
-        {a: true, b: 'arg', c: false, _: ['p1', 'p2']},
+        {a: 1, b: 'arg', c: 0, _: ['p1', 'p2']},
         'argument joined with group options'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('-a -b arg -- -c p1 -p2')),
-        {a: true, b: 'arg', c: false, _: ['-c', 'p1', '-p2']},
+        {a: 1, b: 'arg', c: 0, _: ['-c', 'p1', '-p2']},
         'everything after "--" there is operands'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('-a -b "a r g" "p1 p2"')),
-        {a: true, b: 'a r g', c: false, _: ['p1 p2']},
+        {a: 1, b: 'a r g', c: 0, _: ['p1 p2']},
         'multiword operands and argument'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('-b -a')),
-        {a: false, b: '-a', c: false},
+        {a: 0, b: '-a', c: 0},
         'no optional arguments'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('"-a -b"')),
-        {a: false, b: '', c: false, _: ['-a -b']},
+        {a: 0, b: '', c: 0, _: ['-a -b']},
         'no multiword options'
     );
 
     t.deepEqual(
         oopt('ab:c', arrgv('p1 p2 -a -b arg')),
-        {a: false, b: '', c: false, _: ['p1', 'p2', '-a', '-b', 'arg']},
+        {a: 0, b: '', c: 0, _: ['p1', 'p2', '-a', '-b', 'arg']},
         'operands before options'
     );
 

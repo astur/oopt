@@ -16,7 +16,7 @@ module.exports = (optstring, args = process.argv.slice(2)) => {
             result[optstring[i]] = '';
             i++;
         } else {
-            result[optstring[i]] = false;
+            result[optstring[i]] = 0;
         }
     }
 
@@ -36,7 +36,7 @@ module.exports = (optstring, args = process.argv.slice(2)) => {
         let c = opts.shift();
         while(c !== undefined){
             if(typeof result[c] === 'undefined') throw new Error(`illegal option -- ${c}`);
-            if(typeof result[c] === 'boolean') result[c] = true;
+            if(typeof result[c] === 'number') result[c]++;
             if(typeof result[c] === 'string'){
                 if(opts.length > 0){
                     result[c] = opts.join('');
