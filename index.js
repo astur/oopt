@@ -14,6 +14,7 @@ module.exports = (optstring, args = process.argv.slice(2)) => {
     for(let i = 0, l = optstring.length; i < l; i++){
         if(optstring[i + 1] === ':'){
             result[optstring[i]] = '';
+            result[`_${optstring[i]}`] = [];
             i++;
         } else {
             result[optstring[i]] = 0;
@@ -40,11 +41,13 @@ module.exports = (optstring, args = process.argv.slice(2)) => {
             if(typeof result[c] === 'string'){
                 if(opts.length > 0){
                     result[c] = opts.join('');
+                    result[`_${c}`].push(opts.join(''));
                     break;
                 } else if(args[i + 1] === undefined){
                     throw new Error(`option ${c} needs argument`);
                 } else {
                     result[c] = args[i + 1];
+                    result[`_${c}`].push(args[i + 1]);
                     i++;
                 }
             }
