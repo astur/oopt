@@ -158,6 +158,12 @@ test('values', t => {
     );
 
     t.deepEqual(
+        oopt('a:b:', arrgv('-a "" -b \'\'')),
+        {a: '', b: ''},
+        'empty strings is correct arguments',
+    );
+
+    t.deepEqual(
         oopt('ab:c', arrgv('-b -a')),
         {a: false, b: '-a', c: false},
         'no optional arguments',
