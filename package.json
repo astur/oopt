@@ -1,6 +1,6 @@
 {
   "name": "oopt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Old good getopt with no extras",
   "main": "index.js",
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
